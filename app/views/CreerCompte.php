@@ -37,31 +37,31 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">
-									<form>
-										<div class="mb-3">
-											<label class="form-label">Nom</label>
-											<input class="form-control form-control-lg" type="text" name="name" placeholder="Entrez votre nom" />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Post Nom</label>
-											<input class="form-control form-control-lg" type="text" name="postnom" placeholder="Entrez votre Post nom" />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Prenom</label>
-											<input class="form-control form-control-lg" type="text" name="name" placeholder="Entrez votre Prenom" />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" placeholder="Entrez votre email" />
-										</div>
-										<div class="mb-3">
-											<label class="form-label">mot de passe</label>
-											<input class="form-control form-control-lg" type="password" name="password" placeholder="Entrez votre mot de passe" />
-										</div>
-										<div class="d-grid gap-2 mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">créer compte</a>
-										</div>
-									</form>
+                                    <form action="/creerCompte" method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label">Nom</label>
+                                            <input class="form-control form-control-lg" type="text" name="nom" placeholder="Entrez votre nom" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Post Nom</label>
+                                            <input class="form-control form-control-lg" type="text" name="postnom" placeholder="Entrez votre Post nom" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Prenom</label>
+                                            <input class="form-control form-control-lg" type="text" name="prenom" placeholder="Entrez votre Prenom" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Entrez votre email" required />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Mot de passe</label>
+                                            <input class="form-control form-control-lg" type="password" name="password" placeholder="Entrez votre mot de passe" required />
+                                        </div>
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button type="submit" class="btn btn-lg btn-primary">Créer compte</button>
+                                        </div>
+                                    </form>
 								</div>
 							</div>
 						</div>
