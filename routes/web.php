@@ -1,7 +1,5 @@
 <?php
 
-use App\controllers\AuthController;
-
 function dispatch($route)
 {
     $db = new PDO("mysql:host=localhost;dbname=locatechild", "root", "");
@@ -11,9 +9,9 @@ function dispatch($route)
     } elseif ($route === 'about') {
        (new \App\Controllers\HomeController())->about();
     } elseif($route === 'creerCompte'){
-        $authController = new AuthController($db);
+        $authController = new \App\Controllers\AuthController($db);
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            var_dump($_POST);
+            $authController->register();
         }else{
             (new \App\Controllers\HomeController())->creerCompte();
         }

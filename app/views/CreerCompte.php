@@ -37,7 +37,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">
-                                    <form action="/creerCompte" method="POST">
+                                    <form action="?route=creerCompte" method="POST">
                                         <div class="mb-3">
                                             <label class="form-label">Nom</label>
                                             <input class="form-control form-control-lg" type="text" name="nom" placeholder="Entrez votre nom" required />

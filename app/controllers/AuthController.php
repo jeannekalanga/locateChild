@@ -22,7 +22,7 @@ class AuthController{
             $password = $_POST['password'];
 
             if ($this->userModel->createUser($nom, $postnom, $prenom, $email, $password)) {
-                header('Location: /login');
+                header('Location: ?route=seConnecter');
                 exit();
             } else {
                 echo "Erreur lors de la création du compte.";

@@ -1,5 +1,7 @@
 <?php
     namespace App\Models;
+
+    use PDO;
 class ParentModel
 {
     private $db;
@@ -9,14 +11,15 @@ class ParentModel
     }
 
     public function createUser($nom, $postnom, $prenom, $email, $password){
-        $sql = "INSERT INTO users (nom, postnom, prenom, email, password) VALUES (:nom, :postnom, :prenom, :email, :password)";
+        $sql = "INSERT INTO parent (nomParent, post_nom, prenom, adresseMail, motDePasse) VALUES (:nom, :postnom, :prenom, :email, :password)";
         $stmt = $this->db->prepare($sql);
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         $stmt->bindParam(':nom', $nom);
         $stmt->bindParam(':postnom', $postnom);
         $stmt->bindParam(':prenom', $prenom);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', password_hash($password, PASSWORD_BCRYPT));
+        $stmt->bindParam(':password', $hashedPassword);
 
         return $stmt->execute();
 
