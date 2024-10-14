@@ -11,7 +11,7 @@ class AuthController{
         // Modèle User qui interagit avec la base de données
         $this->userModel = new ParentModel($db);
     }
-
+    // la methode ^pour la creation du compte parent
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,5 +29,41 @@ class AuthController{
             }
         }
         require __DIR__ . '../views/CreerCompte.php';
+    }
+    // la methode de connexion au compte parent
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // Recherche de l'utilisateur dans la base de données
+            $parent = $this->userModel->getUserByEmail($email);
+
+            // Si l'utilisateur existe et le mot de passe correspond
+            if ($parent && password_verify($password, $parent['password'])) {
+                // Démarrer une session et enregistrer les informations utilisateur
+                session_start();
+                $_SESSION['user_id'] = $parent['id'];
+                $_SESSION['user_name'] = $parent['nom'];
+
+                // Rediriger l'utilisateur vers la page d'accueil ou une autre page
+                header('Location: ?route=Accueil');
+                exit();
+            } else {
+                echo "Email ou mot de passe incorrect.";
+            }
+        }
+        require __DIR__ . '../views/SeConnecter.php';
+    }
+
+    public function logout()
+    {
+        // Détruire la session pour déconnecter l'utilisateur
+        session_start();
+        session_unset();
+        session_destroy();
+        header('Location: ?route=seConnecter');
+        exit();
     }
 }

@@ -10,4 +10,5 @@ require '../routes/web.php';
 
 // Exemple d'initialisation de l'application
 $route = $_GET['route'] ?? '/';
+
 dispatch($route);

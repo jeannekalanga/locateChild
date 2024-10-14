@@ -17,4 +17,7 @@ class HomeController{
     public function seConnecter(){
         require '../app/views/SeConnecter.php';
     }
+    public function accueil(){
+        require '../app/views/Accueil.php';
+    }
 }

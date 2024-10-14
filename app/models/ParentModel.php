@@ -24,4 +24,11 @@ class ParentModel
         return $stmt->execute();
 
     }
+    // ce code recupere le parent par email
+    public function getUserByEmail($email){
+        $stmt = $this->db->prepare('SELECT * FROM parent WHERE adresseMail = :email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

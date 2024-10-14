@@ -16,7 +16,13 @@ function dispatch($route)
             (new \App\Controllers\HomeController())->creerCompte();
         }
     } elseif ($route === 'seConnecter'){
-        (new \App\controllers\HomeController())->seConnecter();
+        $authController = new \App\Controllers\AuthController($db);
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $authController->login();
+        }else{
+            (new \App\controllers\HomeController())->seConnecter();
+        }
+        
     }  else {
 
     }

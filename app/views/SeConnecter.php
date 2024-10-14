@@ -37,7 +37,7 @@ Connecter à votre compte pour continuer
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">
-									<form>
+									<form action="?route=seConnecter" method="POST">
 										<div class="mb-3">
 											<label class="form-label">Email</label>
 											<input class="form-control form-control-lg" type="email" name="email" placeholder="Entrez votre email" />
@@ -48,7 +48,7 @@ Connecter à votre compte pour continuer
 										</div>
 
 										<div class="d-grid gap-2 mt-3">
-											<a href="index.html" class="btn btn-lg btn-primary">Se connecter</a>
+										<button type="submit" class="btn btn-lg btn-primary">Se connecter</button>
 										</div>
 									</form>
 								</div>
