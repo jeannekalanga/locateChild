@@ -147,9 +147,10 @@
                                 <div class="card-body px-4">
                                     <!-- Nouvelle div pour Leaflet -->
                                     <div id="world_map" style="height:350px;"></div>
+                                </div>
 
-                                   
-
+                                <div>
+                                    <a href="?route=carte">Carte</a>
                                 </div>
                             </div>
                         </div>

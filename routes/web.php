@@ -23,6 +23,8 @@ function dispatch($route)
             (new \App\controllers\HomeController())->seConnecter();
         }
         
+    } elseif($route === 'accueil') {
+        (new \App\Controllers\HomeController())->accueil();
     }  else {
 
     }

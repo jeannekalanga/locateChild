@@ -37,18 +37,22 @@ class AuthController{
             $email = $_POST['email'];
             $password = $_POST['password'];
 
+
             // Recherche de l'utilisateur dans la base de données
             $parent = $this->userModel->getUserByEmail($email);
 
+
+
             // Si l'utilisateur existe et le mot de passe correspond
-            if ($parent && password_verify($password, $parent['password'])) {
+            if ($parent && password_verify($password, $parent['motDePasse'])) {
+
                 // Démarrer une session et enregistrer les informations utilisateur
                 session_start();
                 $_SESSION['user_id'] = $parent['id'];
                 $_SESSION['user_name'] = $parent['nom'];
 
                 // Rediriger l'utilisateur vers la page d'accueil ou une autre page
-                header('Location: ?route=Accueil');
+                header('Location: ?route=accueil');
                 exit();
             } else {
                 echo "Email ou mot de passe incorrect.";
