@@ -20,4 +20,8 @@ class HomeController{
     public function accueil(){
         require '../app/views/Accueil.php';
     }
+    public function localiser(){
+        require '../app/views/Localiser.php';
+        
+    }
 }

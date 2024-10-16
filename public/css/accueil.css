@@ -1,0 +1,35 @@
+/* Couleur principale - #344D59 */
+.bg-primary {
+    background-color: #344D59;
+}
+
+.text-primary {
+    color: #344D59;
+}
+
+/* Couleur secondaire - #7A90A4 */
+.bg-secondary {
+    background-color: #003C57;
+}
+
+.text-secondary {
+    color: #7A90A4;
+}
+
+/* Couleur tertiaire - #709CA7 */
+.bg-tertiary {
+    background-color: #211A44;
+}
+
+.text-tertiary {
+    color: #709CA7;
+}
+
+/* Couleur quaternaire - #137C8B */
+.bg-quaternary {
+    background-color: #137C8B;
+}
+
+.text-quaternary {
+    color: #137C8B;
+}

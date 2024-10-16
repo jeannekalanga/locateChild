@@ -25,7 +25,9 @@ function dispatch($route)
         
     } elseif($route === 'accueil') {
         (new \App\Controllers\HomeController())->accueil();
-    }  else {
+    } elseif($route === 'localiser') {
+        (new \App\Controllers\HomeController())->localiser();
+    } else {
 
     }
 }

@@ -8,7 +8,6 @@
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
     <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
@@ -43,6 +42,7 @@
         }
         body {
             padding-top: 70px;
+            top : 0px; 
         }
         /* Styles pour les boutons */
         .btn {
@@ -247,13 +247,14 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">
-                        <button class="btn btn-primary" style="height: 40px; width: 100%" onclick="actualiserCarte()">Actualiser la carte</button>                        <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                                <div class="position-relative">
-                                    <i class="align-middle" data-feather="bell"></i>
-                                    <span class="indicator">0</span>
-                                </div>
-                            </a>
+                        <button class="btn btn-primary" style="height: 40px; width: 100%" onclick="actualiserCarte()">Actualiser la carte</button>
+                            <li class="nav-item dropdown">
+                                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                                    <div class="position-relative">
+                                        <i class="align-middle" data-feather="bell"></i>
+                                        <span class="indicator">0</span>
+                                    </div>
+                                </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
                                 <div class="dropdown-menu-header">
                                     Aucune notification jusque là
