@@ -41,7 +41,6 @@
             background-color: white;
         }
         body {
-            padding-top: 70px;
             top : 0px; 
         }
         /* Styles pour les boutons */
@@ -200,38 +199,49 @@
 <body>
     
     <div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-          			<span class="align-middle">LocateChild</span>
-        		</a> 
-				<ul class="sidebar-nav">
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
-							<i class="align-middle" data-feather="sliders"></i> 
-                            <i class="align-middle" data-feather="sliders"></i> 
-                            <span class="align-middle">Page_Accueil</span> 
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <p class="sidebar-brand">
+                    <span class="align-middle">LocateChild</span>
+                </p>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item ">
+                        <a class="sidebar-link" href="?route=accueil">
+                            <i class="align-middle" data-feather="sliders"></i>
+                            <span class="align-middle">Page d'accueil</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-profile.html">
-                            <i class="align-middle" data-feather="user"></i> 
-                            <span class="align-middle">Mon compte</span>
+                        <a class="sidebar-link" href="?route=ajouterEnfant">
+                            <i class="align-middle" data-feather="user"></i>
+                            <span class="align-middle">Ajouter enfant</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-sign-in.html">
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="?route=localiser">
                             <i class="align-middle" data-feather="log-in"></i>
-                            <span class="align-middle">Se connecter</span>
+                            <span class="align-middle">Localiser</span>
                         </a>
                     </li>
-                        
+
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="pages-sign-up.html">
-                            <i class="align-middle" data-feather="user-plus"></i> 
-                            <span class="align-middle">Créer compte</span>
+                        <a class="sidebar-link" href="?route=historique">
+                            <i class="align-middle" data-feather="user-plus"></i>
+                            <span class="align-middle">Consulter historique</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="?route=notification">
+                            <i class="align-middle" data-feather="book"></i>
+                            <span class="align-middle">Voir toutes les notifications</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="?route=gererCompte">
+                            <i class="align-middle" data-feather="align-left"></i>
+                            <span class="align-middle">Mon compte</span>
                         </a>
                     </li>
                 </ul>
@@ -276,11 +286,11 @@
                                 </div>
                             </div>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                                 <i class="align-middle" data-feather="settings"></i>
-                            </a>		
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -288,150 +298,9 @@
 
             <main class="content">
                 <div class="container-fluid p-0">
-                                    <!-- Nouvelle div pour Leaflet -->
-                                    <div id="map" style="width: 100%; height: 600px;"></div>
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
-                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
-
-                                    <script>
-                                        const map = L.map('map').setView([-11.6647, 27.4794], 13);
-                                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                            maxZoom: 19,
-                                            attribution: '© OpenStreetMap'
-                                        }).addTo(map);
-
-                                        const API_KEY = '4948b4ccd6a84509857ce4712d71329a';
-                                            function actualiserCarte() {
-
-                                            // Par exemple, si vous utilisez une API de carte comme Leaflet ou Google Maps,
-                                            // vous pouvez rafraîchir la carte ici.
-                                        }
-                                        function geocodeAddress(address, callback) {
-                                            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(address)}, Lubumbashi&key=${API_KEY}&language=fr`)
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    if (data.results.length > 0) {
-                                                        const { lat, lng } = data.results[0].geometry;
-                                                        callback([parseFloat(lat), parseFloat(lng)]);
-                                                    } else {
-                                                        alert("Adresse non trouvée : " + address);
-                                                    }
-                                                })
-                                                .catch(err => {
-                                                    alert("Erreur de géocodage : " + err);
-                                                });
-                                        }
-
-                                        let routeDetails = {}; // Variable globale pour stocker les détails de l'itinéraire
-
-                                        function showRoute(startCoords, endCoords, startAddress, endAddress) {
-                                            // Supprimer la route précédente si elle existe
-                                            if (window.routeControl) {
-                                                map.removeControl(window.routeControl);
-                                                window.routeControl = null;
-                                            }
-
-                                            // Ajouter les marqueurs de départ et de destination
-                                            const startMarker = L.marker(startCoords).addTo(map)
-                                                .bindPopup('Point de départ: ' + startAddress)
-                                                .openPopup();
-                                            const endMarker = L.marker(endCoords).addTo(map)
-                                                .bindPopup('Destination: ' + endAddress);
-
-                                            // Centrer la carte entre les deux points
-                                            const centerLat = (startCoords[0] + endCoords[0]) / 2;
-                                            const centerLng = (startCoords[1] + endCoords[1]) / 2;
-                                            map.setView([centerLat, centerLng], 13);
-
-                                            // Ajouter la route sur la carte
-                                            window.routeControl = L.Routing.control({
-                                                waypoints: [
-                                                    L.latLng(startCoords[0], startCoords[1]),
-                                                    L.latLng(endCoords[0], endCoords[1])
-                                                ],
-                                                routeWhileDragging: true,
-                                                router: L.routing.osrmv1({
-                                                    serviceUrl: 'https://router.project-osrm.org/route/v1'
-                                                }),
-                                                createMarker: function() { return null; },
-                                                show: false,
-                                                addWaypoints: false,
-                                                draggableWaypoints: false,
-                                            }).on('routesfound', function(e) {
-                                                const routes = e.routes;
-                                                const summary = routes[0].summary;
-
-                                                // Stocker les détails de l'itinéraire dans la variable globale
-                                                routeDetails = {
-                                                    startAddress,
-                                                    endAddress,
-                                                    startCoords,
-                                                    endCoords,
-                                                    distanceInKm: (summary.totalDistance / 1000).toFixed(2),
-                                                    timeInMinutes: Math.round(summary.totalTime / 60),
-                                                    price: ((summary.totalDistance / 1000) * 1500).toFixed(2)
-                                                };
-
-                                                document.getElementById('formStart').value = startAddress;
-                                                document.getElementById('formEnd').value = endAddress;
-                                                document.getElementById('formStartCoords').value = startCoords;
-                                                document.getElementById('formEndCoords').value = endCoords;
-                                                document.getElementById('formDistance').value = routeDetails.distanceInKm;
-                                                document.getElementById('formDuration').value = routeDetails.timeInMinutes;
-                                                document.getElementById('formPrice').value = routeDetails.price;
-
-                                                // Créer la boîte de dialogue personnalisée
-                                                const routeInfo = `
-            <div class="route-info card leaflet-routing-container leaflet-control leaflet-control-custom">
-                <div class="card-body">
-                    <h3 class="card-title">Information de l'itinéraire</h3>
-                    <p><strong>Point de départ :</strong> ${startAddress}</p>
-                    <p><strong>Destination :</strong> ${endAddress}</p>
-                    <p><strong>Distance :</strong> ${routeDetails.distanceInKm} km</p>
-                    <p><strong>Durée estimée :</strong> ${routeDetails.timeInMinutes} minutes</p>
-                    <p><strong>Prix :</strong> ${routeDetails.price} FC</p>
-                    <button class="btn btn-danger" onclick="closeRouteInfo()">Fermer</button>
-                </div>
-            </div>
-        `;
-
-                                                const routeInfoContainer = document.createElement('div');
-                                                routeInfoContainer.innerHTML = routeInfo;
-                                                document.getElementById('map').appendChild(routeInfoContainer);
-                                            }).addTo(map);
-                                        }
-
-
-                                        // Fonction pour fermer la boîte de dialogue personnalisée
-                                        function closeRouteInfo() {
-                                            const routeInfoContainer = document.querySelector('.leaflet-control-custom');
-                                            if (routeInfoContainer) {
-                                                routeInfoContainer.remove();
-                                            }
-                                        }
-
-
-
-
-                                        document.getElementById('routeButton').addEventListener('click', function () {
-                                            const start = document.getElementById('start').value;
-                                            const end = document.getElementById('end').value;
-
-                                            if (start && end) {
-                                                geocodeAddress(start, function(startCoords) {
-                                                    geocodeAddress(end, function(endCoords) {
-                                                        showRoute(startCoords, endCoords, start, end);
-                                                    });
-                                                });
-                                            } else {
-                                                alert("Veuillez entrer des noms d'avenues pour les deux points.");
-                                            }
-                                        });
-                                    </script>
-
-                                </div>
-                        </div>
-
+                    <h1>Données GPS en Temps Réel</h1>
+                    <div id="gps-data">Chargement des données...</div>
+                    <div id="map"></div>
                 </div>
             </main>
             
@@ -449,207 +318,54 @@
             </footer>
         </div>
     </div>
-
-    <!-- Ton fichier JS principal -->
     <script src="js/app.js"></script>
-    
-    <!-- Leaflet JS (inclus une seule fois) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-o9N1jv+VbXv8L+ALq22nMKPS1C6R6kf0D6i6Xw+arYQ="
-        crossorigin=""></script>
-
-   
-    <!-- Script d'initialisation de Leaflet.js -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Initialiser la carte et la centrer sur Lubumbashi
-            var map = L.map('map').setView([-11.6604, 27.4796], 13); // Coordonnées de Lubumbashi
+        // Initialisation de la carte
+        const map = L.map('map').setView([-11.676368, 27.480601], 15); // Coordonnées initiales
 
-            // Ajouter une couche de carte de base (OpenStreetMap)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+        // Ajout de la couche de tuiles (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-            // Liste des communes avec leurs coordonnées
-            var communes = [
-                { name: "Lubumbashi", coords: [-11.6604, 27.4796] },
-                { name: "Katuba", coords: [-11.6842, 27.4769] },
-                { name: "Kenya", coords: [-11.6700, 27.4650] },
-                { name: "Kamalondo", coords: [-11.6650, 27.4950] },
-                { name: "Rwashi", coords: [-11.6167, 27.4333] },
-                { name: "Annexe", coords: [-11.6833, 27.4167] },
-                { name: "Kialunda", coords: [-11.6500, 27.5000] },
-                { name: "Kayembe", coords: [-11.7000, 27.4500] }
-                // Ajoute d'autres communes si nécessaire
-            ];
+        // Création du marqueur
+        const marker = L.marker([-11.676368, 27.480601]).addTo(map);
 
-            // Ajouter des marqueurs pour chaque commune
-            communes.forEach(function(commune) {
-                L.marker(commune.coords).addTo(map)
-                    .bindPopup('<b>' + commune.name + '</b>');
-            });
-        });
-    </script>
+        // Variables pour stocker les anciennes coordonnées
+        let oldLatitude = -11.676368;
+        let oldLongitude = 27.480601;
 
-    
-    <!-- Tes autres scripts de graphiques restent inchangés -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-            var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-            gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-            gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-            // Line chart
-            new Chart(document.getElementById("chartjs-dashboard-line"), {
-                type: "line",
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    datasets: [{
-                        label: "Sales ($)",
-                        fill: true,
-                        backgroundColor: gradient,
-                        borderColor: window.theme.primary,
-                        data: [
-                            2115,
-                            1562,
-                            1584,
-                            1892,
-                            1587,
-                            1923,
-                            2566,
-                            2448,
-                            2805,
-                            3438,
-                            2917,
-                            3327
-                        ]
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        intersect: false
-                    },
-                    hover: {
-                        intersect: true
-                    },
-                    plugins: {
-                        filler: {
-                            propagate: false
-                        }
-                    },
-                    scales: {
-                        xAxes: [{
-                            reverse: true,
-                            gridLines: {
-                                color: "rgba(0,0,0,0.0)"
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                stepSize: 1000
-                            },
-                            display: true,
-                            borderDash: [3, 3],
-                            gridLines: {
-                                color: "rgba(0,0,0,0.0)"
-                            }
-                        }]
+        // Fonction pour rafraîchir les données
+        function refreshData() {
+            fetch('http://localhost/locateChild/app/views/get_gps_data.php')
+                .then(response => response.text())
+                .then(data => {
+                    const coords = data.split(',');
+                    const latitude = parseFloat(coords[0].trim());
+                    const longitude = parseFloat(coords[1].trim());
+
+                    // Vérifier si les coordonnées ont changé
+                    if (latitude !== oldLatitude || longitude !== oldLongitude) {
+                        // Mise à jour du texte et du marqueur
+                        document.getElementById('gps-data').innerText = `Coordonnées : ${data}`;
+                        marker.setLatLng([latitude, longitude]); // Déplacer le marqueur
+                        map.panTo([latitude, longitude]); // Centrer sans changer le zoom
+
+                        // Mettre à jour les anciennes coordonnées
+                        oldLatitude = latitude;
+                        oldLongitude = longitude;
                     }
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Pie chart
-            new Chart(document.getElementById("chartjs-dashboard-pie"), {
-                type: "pie",
-                data: {
-                    labels: ["Chrome", "Firefox", "IE"],
-                    datasets: [{
-                        data: [4306, 3801, 1689],
-                        backgroundColor: [
-                            window.theme.primary,
-                            window.theme.warning,
-                            window.theme.danger
-                        ],
-                        borderWidth: 5
-                    }]
-                },
-                options: {
-                    responsive: !window.MSInputMethodContext,
-                    maintainAspectRatio: false,
-                    legend: {
-                        display: false
-                    },
-                    cutoutPercentage: 75
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Bar chart
-            new Chart(document.getElementById("chartjs-dashboard-bar"), {
-                type: "bar",
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    datasets: [{
-                        label: "This year",
-                        backgroundColor: window.theme.primary,
-                        borderColor: window.theme.primary,
-                        hoverBackgroundColor: window.theme.primary,
-                        hoverBorderColor: window.theme.primary,
-                        data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-                        barPercentage: .75,
-                        categoryPercentage: .5
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    legend: {
-                        display: false
-                    },
-                    scales: {
-                        yAxes: [{
-                            gridLines: {
-                                display: false
-                            },
-                            stacked: false,
-                            ticks: {
-                                stepSize: 20
-                            }
-                        }],
-                        xAxes: [{
-                            stacked: false,
-                            gridLines: {
-                                color: "transparent"
-                            }
-                        }]
-                    }
-                }
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-            var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-            document.getElementById("datetimepicker-dashboard").flatpickr({
-                inline: true,
-                prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-                nextArrow: "<span title=\"Next month\">&raquo;</span>",
-                defaultDate: defaultDate
-            });
-        });
-    </script>
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
+            console.log(coords)
+        }
 
-
+        // Appeler la fonction toutes les 5 secondes
+        setInterval(refreshData, 2000);
+    </script>
 </body>
-
 </html>
