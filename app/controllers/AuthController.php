@@ -55,10 +55,11 @@ class AuthController{
                 header('Location: ?route=accueil');
                 exit();
             } else {
-                echo "Email ou mot de passe incorrect.";
+                // Si les informations sont incorrectes, définir un message d'erreur
+                $errorMessage = 'Email ou mot de passe incorrect.';
             }
         }
-        require __DIR__ . '../views/SeConnecter.php';
+        require __DIR__ . '/../views/SeConnecter.php';
     }
 
     public function logout()

@@ -24,4 +24,7 @@ class HomeController{
         require '../app/views/Localiser.php';
         
     }
+    public function ajouterEnfant(){
+        require ('../app/views/AjouterEnfant.php');
+    }
 }

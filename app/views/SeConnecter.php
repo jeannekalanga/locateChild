@@ -18,6 +18,11 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +38,10 @@
 Connecter à votre compte pour continuer
 </p>
 						</div>
-
+			<!-- Affichage du message d'erreur en rouge si nécessaire -->
+			<?php if (!empty($errorMessage)) : ?>
+				<p class="error"><?= htmlspecialchars($errorMessage); ?></p>
+			<?php endif; ?>
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">

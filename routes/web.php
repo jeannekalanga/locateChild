@@ -22,12 +22,21 @@ function dispatch($route)
         }else{
             (new \App\controllers\HomeController())->seConnecter();
         }
-        
     } elseif($route === 'accueil') {
         (new \App\Controllers\HomeController())->accueil();
     } elseif($route === 'localiser') {
         (new \App\Controllers\HomeController())->localiser();
+    }elseif ($route === 'ajouterEnfant') {
+        $enfantContoller = new \App\Controllers\EnfantController($db);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Si la requête est en POST, on ajoute l'enfant
+            $enfantContoller->ajouterEnfant();
+        } else {
+            // Si la requête est en GET, on affiche le formulaire d'ajout
+            (new \App\Controllers\HomeController())->ajouterEnfant();
+        }
     } else {
+
 
     }
 }
