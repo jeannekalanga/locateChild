@@ -77,8 +77,19 @@
             </div>
         </nav>
         <!-- Fin de la barre de navigation latérale -->
-
         <div class="main">
+             <!-- Vérifiez s'il y a un message de succès dans la session -->
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="alert alert-success" role="alert">
+                <?php
+                    // Affichez le message de succès
+                    echo $_SESSION['success_message'];
+                    
+                    // Supprimez le message après l'affichage
+                    unset($_SESSION['success_message']);
+                ?>
+            </div>
+        <?php endif; ?>
             <!-- La barre de navigation supérieure -->
             <nav class="navbar navbar-expand navbar-light navbar-bg">
                 <a class="sidebar-toggle js-sidebar-toggle">
@@ -117,7 +128,7 @@
                     <div class="row flex-grow-1">
                         <!-- Première colonne de boutons -->
                         <div class="col-12 col-md-6 d-flex mb-3">
-                            <a href="?route=localiser" class="bg-primary w-100 d-flex align-items-center justify-content-center" style="height: 100%;">
+                            <a href="?route=localiser" class="btn bg-primary w-100 d-flex align-items-center justify-content-center" style="height: 100%;">
                                 <i class="align-middle me-2" data-feather="check-circle" style="height: 40px; width: 40px;"></i>
                                 <span>Localiser enfant</span>
                             </a>
