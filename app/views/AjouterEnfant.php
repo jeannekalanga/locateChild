@@ -32,13 +32,6 @@
 								Ajouter un enfant
 							</p>
 						</div>
-						<!-- Afficher un message d'erreur s'il existe -->
-						<?php if (isset($_SESSION['error_message'])): ?>
-									<div class="alert alert-danger">
-										<?php echo $_SESSION['error_message']; unset($_SESSION['error_message']); ?>
-									</div>
-						<?php endif; ?>
-
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">

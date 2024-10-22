@@ -29,10 +29,10 @@ class EnfantController {
             // Si l'enfant est ajouté avec succès
             if ($isEnfantCreated) {
                 // On stocke le message de succès dans une session
-                $_SESSION['success_message'] = "Enfant ajouté avec succès !";
+                echo "enfant ajouté avec succès";
                 
                 // Redirection vers la page d'accueil
-                header("Location: ?route=accueil");
+                echo " <br> <a href=\"?route=accueil\"> cliquer pour rentrer en arrière </a>" ;
                 exit();
             } else {
                 // Gestion de l'erreur

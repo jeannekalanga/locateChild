@@ -2,42 +2,57 @@
 
 function dispatch($route)
 {
-    $db = new PDO("mysql:host=localhost;dbname=locatechild", "root", "");
+     // Connexion à la base de données
+     $db = new PDO("mysql:host=localhost;dbname=locatechild", "root", "");
 
-    if ($route === '/') {
-        (new \App\Controllers\HomeController())->index();
-    } elseif ($route === 'about') {
-       (new \App\Controllers\HomeController())->about();
-    } elseif($route === 'creerCompte'){
-        $authController = new \App\Controllers\AuthController($db);
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $authController->register();
-        }else{
-            (new \App\Controllers\HomeController())->creerCompte();
-        }
-    } elseif ($route === 'seConnecter'){
+     // Route principale
+     if ($route === '/') {
+         (new \App\Controllers\HomeController($db))->index();  // Passe $db à HomeController
+     } 
+     elseif ($route === 'about') {
+         (new \App\Controllers\HomeController($db))->about();  // Passe $db à HomeController
+     }
+     elseif ($route === 'creerCompte'){
+         $authController = new \App\Controllers\AuthController($db);
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+             $authController->register();
+         } else {
+             (new \App\Controllers\HomeController($db))->creerCompte();
+         }
+     } 
+    elseif ($route === 'seConnecter'){
         $authController = new \App\Controllers\AuthController($db);
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $authController->login();
-        }else{
-            (new \App\controllers\HomeController())->seConnecter();
-        }
-    } elseif($route === 'accueil') {
-        (new \App\Controllers\HomeController())->accueil();
-    } elseif($route === 'localiser') {
-        (new \App\Controllers\HomeController())->localiser();
-    }elseif ($route === 'ajouterEnfant') {
-        $enfantContoller = new \App\Controllers\EnfantController($db);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Si la requête est en POST, on ajoute l'enfant
-            $enfantContoller->ajouterEnfant();
         } else {
-            // Si la requête est en GET, on affiche le formulaire d'ajout
-            (new \App\Controllers\HomeController())->ajouterEnfant();
+            (new \App\Controllers\HomeController($db))->seConnecter();
         }
-    } else {
-
-
+    } 
+    elseif ($route === 'accueil') {
+        (new \App\Controllers\HomeController($db))->accueil();
+    } 
+    // Route pour localiser l'enfant
+    elseif ($route === 'localiser') {
+        $chil_id = $_GET['chil_id'] ?? null; // Récupère l'ID de l'enfant
+        if ($chil_id) {
+            (new \App\Controllers\HomeController($db))->localiser($chil_id); // Passe la connexion et l'ID
+        } else {
+            echo "ID de l'enfant manquant";
+        }
+    }
+    // Route pour recevoir les données GPS depuis Arduino
+    elseif ($route === 'receiveGpsData') {
+        (new \App\Controllers\GpsController($db))->storeGpsData(); // Passe la connexion à GpsController
+    } 
+    elseif ($route === 'ajouterEnfant') {
+        $enfantController = new \App\Controllers\EnfantController($db); // Passe la connexion
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $enfantController->ajouterEnfant();
+        } else {
+            (new \App\Controllers\HomeController($db))->ajouterEnfant(); // Formulaire d'ajout d'enfant
+        }
+    } 
+    else {
     }
 }
 
