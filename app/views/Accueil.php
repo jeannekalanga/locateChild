@@ -36,7 +36,7 @@
                     <li class="sidebar-item active">
                         <a class="sidebar-link" href="?route=accueil">
                             <i class="align-middle" data-feather="sliders"></i> 
-                            <span class="align-middle">Page_Accueil</span> 
+                            <span class="align-middle">Page d'accueil</span>
                         </a>
                     </li>
 
