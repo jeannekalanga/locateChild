@@ -82,9 +82,12 @@
         <?php if (isset($_SESSION['success_message'])): ?>
             <div class="alert alert-success" role="alert">
                 <?php
+                
                     // Affichez le message de succès
                     echo $_SESSION['success_message'];
                     
+                    
+
                     // Supprimez le message après l'affichage
                     unset($_SESSION['success_message']);
                 ?>
@@ -191,7 +194,7 @@
             // Ajoutez ici votre logique de déconnexion
             alert('Déconnecté avec succès!');
             // Exemple de redirection après déconnexion
-            window.location.href = '?route=accueil';
+            window.location.href = '?route=/';
         }
     </script>
 </body>

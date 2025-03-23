@@ -14,17 +14,18 @@ class EnfantController {
     public function ajouterEnfant() {
         // Récupérer les données POST
         $nom_complet_enfant = $_POST['nom_complet_enfant'] ?? '';
-        $idEcole = $_POST['idEcole'] ?? '';
+        $nomEcole = $_POST['nomEcole'] ?? '';
         $adresseMaison = $_POST['adresseMaison'] ?? '';
         $idParent = $_POST['idParent'] ?? ''; // Cet idParent doit être passé dynamiquement après la connexion du parent
+        $addresseEcole = $_POST['addEcole'] ?? '';
 
         // Vérifier que tous les champs requis sont fournis
-        if (!empty($nom_complet_enfant) && !empty($idEcole) && !empty($adresseMaison) && !empty($idParent)) {
+        if (!empty($nom_complet_enfant) && !empty($nomEcole) && !empty($adresseMaison) && !empty($idParent) && !empty($addresseEcole)) {
             // Instancier le modèle Enfant
             $enfantModel = new EnfantModel($this->db);
             
             // Appeler la méthode createEnfant pour ajouter l'enfant dans la base de données
-            $isEnfantCreated = $enfantModel->createEnfant($nom_complet_enfant, $adresseMaison, $idParent, $idEcole);
+            $isEnfantCreated = $enfantModel->createEnfant($nom_complet_enfant, $adresseMaison, $idParent, $nomEcole, $addresseEcole);
             
             // Si l'enfant est ajouté avec succès
             if ($isEnfantCreated) {

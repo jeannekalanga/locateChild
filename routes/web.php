@@ -33,7 +33,7 @@ function dispatch($route)
     } 
     // Route pour localiser l'enfant
     elseif ($route === 'localiser') {
-        $chil_id = $_GET['chil_id'] ?? null; // Récupère l'ID de l'enfant
+        $chil_id = 1; // Récupère l'ID de l'enfant
         if ($chil_id) {
             (new \App\Controllers\HomeController($db))->localiser($chil_id); // Passe la connexion et l'ID
         } else {

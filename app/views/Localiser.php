@@ -358,7 +358,7 @@
         }).addTo(map);
 
         // Création du marqueur
-        const marker = L.marker([-11.676368, 27.480601]).addTo(map);
+        const marker = L.marker([-11.6696, 27.47896]).addTo(map);
 
         // Variables pour stocker les anciennes coordonnées
         let oldLatitude = -11.676368;

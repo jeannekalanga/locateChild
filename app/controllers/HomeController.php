@@ -31,7 +31,7 @@ class HomeController {
     }
 
     public function localiser($chil_id) {
-        $position = $this->gpsModel->getLastGpsPosition($chil_id);  // Récupère la dernière position
+        //$position = $this->gpsModel->getLastGpsPosition($chil_id);  // Récupère la dernière position
         require '../app/views/Localiser.php';  // Affiche la page de localisation
     }
 

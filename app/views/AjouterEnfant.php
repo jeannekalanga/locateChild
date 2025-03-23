@@ -40,13 +40,18 @@
 											<label for="nom_complet_enfant" class="form-label">Nom complet de l'enfant</label>
 											<input id="nom_complet_enfant" class="form-control form-control-lg" type="text" name="nom_complet_enfant" placeholder="Entrez le nom complet de l'enfant" required />
 										</div>
-										<div class="mb-3">
-											<label for="idEcole" class="form-label">ID École</label>
-											<input id="idEcole" class="form-control form-control-lg" type="text" name="idEcole" placeholder="Entrez l'ID de son école" required />
-										</div>
+										
 										<div class="mb-3">
 											<label for="adresseMaison" class="form-label">Adresse de la maison</label>
 											<input id="adresseMaison" class="form-control form-control-lg" type="text" name="adresseMaison" placeholder="Entrez l'adresse de la maison" required />
+										</div>
+										<div class="mb-3">
+											<label for="idEcole" class="form-label">Nom École</label>
+											<input id="idEcole" class="form-control form-control-lg" type="text" name="nomEcole" placeholder="Entrez le nom de  l'école" required />
+										</div>
+										<div class="mb-3">
+											<label for="addEcole" class="form-label">Addresse École</label>
+											<input id="addEcole" class="form-control form-control-lg" type="text" name="addEcole" placeholder="Entrez l'addresse de l'école" required />
 										</div>
 										<!-- Parent ID can be passed as a hidden field if needed -->
 										<input type="hidden" name="idParent" value="1" /> 

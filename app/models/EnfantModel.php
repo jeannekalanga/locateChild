@@ -11,16 +11,17 @@ class EnfantModel {
         $this->db = $db;
     }
 
-    public function createEnfant($nom_complet_enfant, $adresseMaison, $idParent, $idEcole) {
+    public function createEnfant($nom_complet_enfant, $adresseMaison, $idParent, $nomEcole,$addresseEcole) {
         // Préparation de la requête SQL
-        $sql = "INSERT INTO enfant (nom_complet_enfant, adresseMaison, idParent, idEcole) VALUES (:nom_complet_enfant, :adresseMaison, :idParent, :idEcole)";
+        $sql = "INSERT INTO enfant (nom_complet_enfant, adresseMaison, idParent, nomEcole, adresseEcole) VALUES (:nom_complet_enfant, :adresseMaison, :idParent, :nomEcole, :adresseEcole)";
         $stmt = $this->db->prepare($sql);
 
         // Liaison des paramètres
         $stmt->bindParam(':nom_complet_enfant', $nom_complet_enfant);
         $stmt->bindParam(':adresseMaison', $adresseMaison);
         $stmt->bindParam(':idParent', $idParent);
-        $stmt->bindParam(':idEcole', $idEcole);
+        $stmt->bindParam(':nomEcole', $nomEcole);
+        $stmt->bindParam(':adresseEcole', $addresseEcole);
 
         // Exécution de la requête et retour du résultat
         if ($stmt->execute()) {
