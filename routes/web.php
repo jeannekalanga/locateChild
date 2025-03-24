@@ -51,7 +51,9 @@ function dispatch($route)
         } else {
             (new \App\Controllers\HomeController($db))->ajouterEnfant(); // Formulaire d'ajout d'enfant
         }
-    } 
+    } elseif($route === 'historique'){
+        (new \App\controllers\HomeController($db))->historique();
+    }
     else {
     }
 }

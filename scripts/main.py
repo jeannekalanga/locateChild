@@ -53,7 +53,7 @@ while True:
                     print(f"Latitude : {latitude}, Longitude : {longitude}")
 
                     # Écrire les coordonnées dans le fichier temporaire
-                    with open("gps_data_temp.txt", "w") as f:
+                    with open("scripts/gps_data_temp.txt", "w") as f:
                         f.write(f"Latitude : {latitude}, Longitude : {longitude}\n")
 
                     # Mettre à jour les dernières coordonnées

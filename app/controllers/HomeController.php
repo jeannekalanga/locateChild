@@ -38,5 +38,9 @@ class HomeController {
     public function ajouterEnfant(){
         require ('../app/views/AjouterEnfant.php');
     }
+
+    public function historique(){
+        require '../app/views/Historiques.php';
+    }
 }
 ?>

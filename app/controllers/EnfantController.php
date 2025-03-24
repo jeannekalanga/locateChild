@@ -45,5 +45,7 @@ class EnfantController {
         }
     }
 
+    
+
     // Vous pouvez ajouter d'autres méthodes ici (editEnfant, deleteEnfant, etc.)
 }

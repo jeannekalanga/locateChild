@@ -240,14 +240,14 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item ">
                         <a class="sidebar-link" href="?route=localiser">
                             <i class="align-middle" data-feather="log-in"></i>
                             <span class="align-middle">Localiser</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                         <a class="sidebar-link" href="?route=historique">
                             <i class="align-middle" data-feather="user-plus"></i>
                             <span class="align-middle">Consulter historique</span>
@@ -319,9 +319,10 @@
 
             <main class="content">
                 <div class="container-fluid p-0">
-                    <h1>Données GPS en Temps Réel</h1>
+                    <h1>Consulter l'historique des localisations en fonction du Jour</h1>
                     <div id="gps-data">Chargement des données...</div>
-                    <div id="map"></div>
+                    <button class="btn btn-primary" style="height: 40px; width: 100%" onclick="actualiserCarte()"> Historique du </button>
+                    
                 </div>
             </main>
             
